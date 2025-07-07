@@ -1,0 +1,1336 @@
+[gd_scene load_steps=31 format=3 uid="uid://bgpvb52duocvr"]
+
+[ext_resource type="Script" uid="uid://ov3jdgvqx7fe" path="res://scenes/scripts/units_spawn.gd" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://cicfoe5b0b2dk" path="res://icon.svg" id="2_jkv2x"]
+[ext_resource type="Theme" uid="uid://d25i0jasfin20" path="res://assets/theme.tres" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://bta6gk6mlruk3" path="res://scenes/scripts/main_buttons.gd" id="3_choun"]
+[ext_resource type="Script" uid="uid://buqv4rubdj5y5" path="res://scenes/scripts/fps.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://ce477nch4wlkf" path="res://scenes/scripts/settings/speed_adjustment.gd" id="3_tipki"]
+[ext_resource type="Script" uid="uid://cbaaj7xo3k2va" path="res://scenes/scripts/settings/console_control.gd" id="5_85g3d"]
+[ext_resource type="Script" uid="uid://35a3ylogth6i" path="res://scenes/scripts/settings/unit_customization.gd" id="5_eb6dy"]
+[ext_resource type="Script" uid="uid://dvs1wxxwc22em" path="res://scenes/scripts/population_data.gd" id="5_trceg"]
+[ext_resource type="Script" uid="uid://tb7ptduh37r8" path="res://scenes/scripts/settings/window_control.gd" id="6_85g3d"]
+[ext_resource type="Script" uid="uid://b2i7dvqiiukwc" path="res://scenes/scripts/food_supply_customization.gd" id="6_a8y0u"]
+[ext_resource type="Script" uid="uid://og6d51i27ahj" path="res://scenes/scripts/food_spawn.gd" id="7_tipki"]
+[ext_resource type="Script" uid="uid://cikwj20n7w3av" path="res://scenes/analytics.gd" id="10_a8y0u"]
+[ext_resource type="Script" uid="uid://d1715ceucjecc" path="res://addons/god_plot/tools/series/series_types/series_2d/line_series.gd" id="12_a8y0u"]
+[ext_resource type="Script" uid="uid://i1x452w5gmhn" path="res://addons/god_plot/tools/graphs/graph_2d.gd" id="13_jbj1t"]
+[ext_resource type="Script" uid="uid://bsnqqpu4y5f26" path="res://addons/radar_graph/radar_graph/radar_graph.gd" id="14_jbj1t"]
+[ext_resource type="FontFile" uid="uid://b7w6vavyp1o7w" path="res://assets/ShareTechMono-Regular.ttf" id="15_muem4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
+bg_color = Color(0.145266, 0.145266, 0.145266, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqmmt"]
+bg_color = Color(0.15967, 0.15967, 0.15967, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trceg"]
+bg_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8y0u"]
+bg_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tipki"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+bg_color = Color(0.28, 0.138227, 0.1064, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc10j"]
+bg_color = Color(0.103744, 0.103744, 0.103744, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkv2x"]
+bg_color = Color(0.25, 0.25, 0.5, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbj1t"]
+bg_color = Color(0.25, 0.5, 0.5, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muem4"]
+bg_color = Color(0.25, 0.5, 0.25, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp3eg"]
+bg_color = Color(0.5, 0.5, 0.25, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ld40"]
+bg_color = Color(0.5, 0.25, 0.25, 1)
+
+[node name="Main" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+z_index = -100
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_sugp2")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainUI" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="ControlPanel" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/Title"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/Title"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Genesis2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/Title/HBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("2_sugp2")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_jyhfs")
+text = "   "
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/Title/HBoxContainer/Genesis2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_jkv2x")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Genesis" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/Title/HBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+theme_override_colors/font_color = Color(0.972549, 0.721569, 0.247059, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_jyhfs")
+text = " GENESIS:"
+vertical_alignment = 1
+
+[node name="Genesis2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/Title"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme = ExtResource("2_sugp2")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_jyhfs")
+text = "::::: EVOLUTION OF TRAITS BY SELECTION"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+theme = ExtResource("2_sugp2")
+theme_override_font_sizes/font_size = 20
+text = "<< Configure "
+horizontal_alignment = 2
+
+[node name="MainButtons" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+script = ExtResource("3_choun")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/MainButtons"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "START Simulation"
+theme_override_font_sizes/font_size = 32
+text = "START"
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "PAUSE Simulation"
+theme_override_font_sizes/font_size = 32
+text = "PAUSE"
+
+[node name="StopButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "STOP Simulation
+- clear units & food on canvas"
+theme_override_font_sizes/font_size = 32
+text = "STOP"
+
+[node name="ResetButon" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "RESET Simulation
+- reset parameters
+- clear units & food on canvas"
+theme_override_font_sizes/font_size = 32
+text = "RESET"
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/MainButtons"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+
+[node name="SpeedAdjustment" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Adjust Simulation Speed (0.0 - 10.0)
+- 0.0 is freeze
+- higher speeds build unstability
+- Generation: current generation
+- Time: elapsed time in the generation"
+theme_override_constants/separation = 0
+script = ExtResource("3_tipki")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Speed:"
+
+[node name="Speed" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.1
+alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "  Generation:"
+
+[node name="GenTime" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ya4ey")
+text = "0"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "  Time:"
+
+[node name="ElapsedTime" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ya4ey")
+text = "00.00"
+
+[node name="GenTime4" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "s"
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+
+[node name="--Population--" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_gqmmt")
+text = "---- Population ----"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("5_eb6dy")
+
+[node name="PopulationData" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+script = ExtResource("5_trceg")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/PopulationData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Current:"
+horizontal_alignment = 2
+
+[node name="CurrentPopulation" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/PopulationData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_trceg")
+text = "0000"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/PopulationData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "  MaxReached:"
+horizontal_alignment = 2
+
+[node name="MaxPopulation" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/PopulationData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8y0u")
+text = "0000"
+
+[node name="PopulationProgress" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="PopulationProgressBar" type="ProgressBar" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/PopulationProgress"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DefaultPopulationData" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Setup the initial population size and randomization
+example:
+100 ± 20 = value between (100-20) and (100+20)"
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/DefaultPopulationData"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Population:"
+horizontal_alignment = 2
+
+[node name="PopulationValue" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/DefaultPopulationData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 100.0
+rounded = true
+allow_greater = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/DefaultPopulationData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "  ± "
+horizontal_alignment = 2
+
+[node name="PopulationRandom" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/DefaultPopulationData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+step = 10.0
+value = 20.0
+
+[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+
+[node name="--Parameters--" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_gqmmt")
+text = "---- Parameters ----"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SizeData" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SizeData"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Unit Size:"
+horizontal_alignment = 2
+
+[node name="SizeValue" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SizeData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 100.0
+allow_greater = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SizeData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "  ± "
+horizontal_alignment = 2
+
+[node name="SizeRandom" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SizeData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+value = 20.0
+allow_greater = true
+
+[node name="EnergyData" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/EnergyData"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Max Energy:"
+horizontal_alignment = 2
+
+[node name="EnergyValue" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/EnergyData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 100.0
+allow_greater = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/EnergyData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "  ± "
+horizontal_alignment = 2
+
+[node name="EnergyRandom" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/EnergyData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 20.0
+allow_greater = true
+
+[node name="SenseData" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SenseData"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Sense Range:"
+horizontal_alignment = 2
+
+[node name="SenseValue" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SenseData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 100.0
+allow_greater = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SenseData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "  ± "
+horizontal_alignment = 2
+
+[node name="SenseRandom" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SenseData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 20.0
+allow_greater = true
+
+[node name="SpeedData" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedData"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Movement Speed:"
+horizontal_alignment = 2
+
+[node name="SpeedValue" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 100.0
+allow_greater = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "  ± "
+horizontal_alignment = 2
+
+[node name="SpeedRandom" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 20.0
+allow_greater = true
+
+[node name="CarnivoreData" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/CarnivoreData"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Predation Level:"
+horizontal_alignment = 2
+
+[node name="CarnivoreValue" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/CarnivoreData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 100.0
+allow_greater = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/CarnivoreData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "  ± "
+horizontal_alignment = 2
+
+[node name="CarnivoreRandom" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/CarnivoreData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+max_value = 1000.0
+value = 20.0
+allow_greater = true
+
+[node name="TradeOffs" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Some parameters have a tradeoff.
+for example;
+ - max energy increses with size
+ - sense range & movement speed decreases with size"
+theme_override_constants/separation = 0
+
+[node name="TradeoffCheck" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/TradeOffs"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "TRADEOFF"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/TradeOffs"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "  %Threshold:"
+horizontal_alignment = 2
+
+[node name="TradeoffThreshold" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/TradeOffs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+value = 10.0
+
+[node name="--Reproduction--" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_gqmmt")
+text = "---- Reproduction ----"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="RedproductionData" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Reproduction threshold determines the ability to 
+reproduce at the end of each generation cycle 
+depending on available energy
+Can reproduce if; 
+Energy >= MaxEnergy * ReproductiveThreshold
+
+'Randomize Check' will mutate the traits using 
+initial parameters from parents properties 
+(~ mimic sexual reproduction). 
+Uncheck will result same trait passing similar to 
+asexual reproduction."
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/RedproductionData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Threshold:"
+horizontal_alignment = 2
+
+[node name="ReproductionThreshold" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/RedproductionData"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+tooltip_text = "Reproduction threshold determines the ability to 
+reproduce at the end of each generation cycle 
+depending on available energy
+Can reproduce if; 
+Energy >= MaxEnergy * ReproductiveThreshold
+
+'Randomize Check' will mutate the traits using 
+initial parameters from parents properties 
+(~ mimic sexual reproduction). 
+Uncheck will result same trait passing similar to 
+asexual reproduction."
+value = 10.0
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/RedproductionData"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = " "
+horizontal_alignment = 2
+
+[node name="ReproductionRandomize" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/RedproductionData"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Reproduction threshold determines the ability to 
+reproduce at the end of each generation cycle 
+depending on available energy
+Can reproduce if; 
+Energy >= MaxEnergy * ReproductiveThreshold
+
+'Randomize Check' will mutate the traits using 
+initial parameters from parents properties 
+(~ mimic sexual reproduction). 
+Uncheck will result same trait passing similar to 
+asexual reproduction."
+theme_override_font_sizes/font_size = 24
+text = "Randomize"
+
+[node name="--EnergDrain--" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_gqmmt")
+text = "---- Energy Drain ----"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="EnergyDrain" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Energy drain with;
+- From parent - when reproducing
+- For movement"
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/EnergyDrain"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Reproduction:"
+horizontal_alignment = 2
+
+[node name="ReproductionEnergyDrain" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/EnergyDrain"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+value = 10.0
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/EnergyDrain"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = " Movement:"
+horizontal_alignment = 2
+
+[node name="MovementEnergyDrain" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/EnergyDrain"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+value = 10.0
+
+[node name="HSeparator6" type="HSeparator" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+
+[node name="--FoodSupply--" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_gqmmt")
+text = "---- Food Supply ----"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("6_a8y0u")
+
+[node name="FoodSupplyAmount" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyAmount"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Amount:"
+horizontal_alignment = 2
+
+[node name="FoodSupplyAmount" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyAmount"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 9999.0
+rounded = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyAmount"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "±"
+horizontal_alignment = 2
+
+[node name="FoodSupplyIncrement" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyAmount"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -100.0
+rounded = true
+
+[node name="FoodSupplyHold" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyAmount"]
+unique_name_in_owner = true
+layout_mode = 2
+text = " Hold"
+
+[node name="FoodSupplyMax" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyMax"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Max Amount:"
+horizontal_alignment = 2
+
+[node name="FoodSupplyMax" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyMax"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 9999.0
+rounded = true
+
+[node name="FoodSupplyMaxHold" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyMax"]
+unique_name_in_owner = true
+layout_mode = 2
+text = " Hold max"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyMax"]
+layout_mode = 2
+
+[node name="FoodSupplyMin" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyMin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = "Min Amount:"
+horizontal_alignment = 2
+
+[node name="FoodSupplyMin" type="SpinBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyMin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 9999.0
+rounded = true
+
+[node name="FoodSupplyMinHold" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/FoodSupplyMin"]
+unique_name_in_owner = true
+layout_mode = 2
+text = " Hold min"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SimulationPanel" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="title" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel"]
+layout_mode = 2
+theme = ExtResource("2_sugp2")
+theme_override_font_sizes/font_size = 20
+text = "<< Visualizer "
+horizontal_alignment = 2
+
+[node name="WorldArea" type="ColorRect" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel"]
+unique_name_in_owner = true
+show_behind_parent = true
+custom_minimum_size = Vector2(800, 800)
+layout_mode = 2
+color = Color(0.135617, 0.135617, 0.135617, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/WorldArea"]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 19.0
+grow_horizontal = 2
+
+[node name="Canvas" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/WorldArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_sugp2")
+text = " Canvas: 800 px"
+
+[node name="FPS" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/WorldArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_sugp2")
+text = "FPS: "
+horizontal_alignment = 2
+script = ExtResource("3_tbgi4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/WorldArea" groups=["wall"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/WorldArea/StaticBody2D"]
+rotation = 1.57079
+shape = SubResource("WorldBoundaryShape2D_tipki")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/WorldArea/StaticBody2D"]
+position = Vector2(0, 800)
+shape = SubResource("WorldBoundaryShape2D_tipki")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/WorldArea/StaticBody2D"]
+position = Vector2(800, 0)
+rotation = -1.57079
+shape = SubResource("WorldBoundaryShape2D_tipki")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/WorldArea/StaticBody2D"]
+rotation = -3.14159
+shape = SubResource("WorldBoundaryShape2D_tipki")
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("2_sugp2")
+theme_override_font_sizes/font_size = 20
+text = "<< Console "
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Console" type="TextEdit" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_sugp2")
+theme_override_colors/font_readonly_color = Color(0.777882, 0.777882, 0.777882, 1)
+wrap_mode = 1
+scroll_smooth = true
+highlight_current_line = true
+draw_tabs = true
+script = ExtResource("5_85g3d")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel"]
+layout_mode = 2
+
+[node name="FileDialog" type="FileDialog" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/HBoxContainer"]
+unique_name_in_owner = true
+initial_position = 1
+
+[node name="ConsoleSearchText" type="LineEdit" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+tooltip_text = "Search console"
+
+[node name="ConsoleSearchButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Search console"
+text = "SEARCH"
+
+[node name="ConsoleCopyButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Copy text"
+text = "COPY"
+
+[node name="ConsoleExportButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Export console to .txt file"
+text = "EXPORT"
+
+[node name="ConsoleClearButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Clear console"
+text = "CLEAR"
+
+[node name="ConsoleWriteToFileCheck" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Write console to .txt file
+When enabled console will autosave to file specified"
+text = "WRITE"
+
+[node name="PathToFileLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/SimulationPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.414704, 0.414704, 0.414704, 1)
+theme_override_font_sizes/font_size = 16
+text = "://PathToFile"
+clip_text = true
+
+[node name="AnalyticsPanel" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="WindowControl" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel"]
+layout_mode = 2
+script = ExtResource("6_85g3d")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InformationButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl"]
+layout_mode = 2
+tooltip_text = "info"
+text = " i "
+
+[node name="MinimizeButton" type="CheckButton" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl"]
+layout_mode = 2
+tooltip_text = "Toggle Fullscreen"
+button_pressed = true
+
+[node name="TerminateButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl"]
+layout_mode = 2
+tooltip_text = "Exit Genesis"
+theme_override_styles/normal = SubResource("StyleBoxFlat_tipki")
+text = "  < TERMINATE >  "
+
+[node name="InfoWindow" type="Window" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl"]
+title = "Info"
+initial_position = 1
+size = Vector2i(480, 660)
+min_size = Vector2i(480, 660)
+max_size = Vector2i(480, 660)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl/InfoWindow"]
+custom_minimum_size = Vector2(480, 660)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl/InfoWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_readonly_color = Color(0.863239, 0.863239, 0.863239, 1)
+text = "GENESIS 
+-------------------------
+Evolution of Traits by Selection
+-------------------------
+[A sandbox evolution simulator with trait inheritance and natural selection]
+-------------------------
+Genesis is a real-time evolution simulator built with Godot Engine that demonstrates how traits evolve through natural selection across generations. Watch digital organisms compete for resources, reproduce, and pass traits to offspring with mutations.
+Genesis simulates a population of digital organisms (units) competing for limited resources (food) within a bounded environment. Through reproduction, trait inheritance, mutation, and natural selection pressures, you can observe how populations evolve over time and how certain characteristics become more or less prevalent.
+-------------------------
+License & Credits
+MIT License - Free for educational, research, and commercial use
+
+- Developer: Jude Janitha Niroshan (@Bukkbeek)
+- Portfolio: bukkbeek.github.io
+- Github: github.com/bukkbeek
+-------------------------"
+editable = false
+wrap_mode = 1
+scroll_smooth = true
+
+[node name="LinkButton" type="LinkButton" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl/InfoWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Visit Portfolio"
+text = "PORTFOLIO: https://bukkbeek.github.io/"
+uri = "https://bukkbeek.github.io/"
+
+[node name="LinkButton2" type="LinkButton" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/WindowControl/InfoWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Visit GitHub repo"
+text = "GITHUB: https://github.com/bukkbeek/"
+uri = "https://github.com/bukkbeek/"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("2_sugp2")
+theme_override_font_sizes/font_size = 20
+text = "<< Analytics "
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Analytics" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("10_a8y0u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics"]
+layout_mode = 2
+
+[node name="PopulationAgainstGenerationLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Population against Generation"
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_yc10j")
+text = "Population Growth"
+
+[node name="PopulationGraphButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Save .png image"
+text = "Print"
+
+[node name="PopulationAgainstGenerationRenderer" type="Control" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="PopulationGrowthGraph" type="Control" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/PopulationAgainstGenerationRenderer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_jbj1t")
+x_min = 1.0
+x_decimal_places = 0
+x_gridlines_opacity = 0.1
+y_max = 100.0
+y_tick_count = 5
+y_decimal_places = 0
+y_gridlines_opacity = 0.1
+background_color = Color(0.137255, 0.137255, 0.137255, 1)
+axis_color = Color(0.500095, 0.500095, 0.500095, 1)
+axis_thickness = 1.5
+label_size = 0.6
+metadata/_custom_type_script = "uid://i1x452w5gmhn"
+
+[node name="PopulationGrowthSeries" type="Node" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/PopulationAgainstGenerationRenderer/PopulationGrowthGraph"]
+unique_name_in_owner = true
+script = ExtResource("12_a8y0u")
+thickness = 0.5
+color = Color(1, 1, 1, 1)
+metadata/_custom_type_script = "uid://d1715ceucjecc"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics"]
+layout_mode = 2
+
+[node name="TraitsEvolutionLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Average trait values against Generation"
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_yc10j")
+text = "Traits Evolution"
+
+[node name="TraitsEvolutionGraphButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Save .png image"
+text = "Print"
+
+[node name="Traits" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics"]
+layout_mode = 2
+
+[node name="TraitSize" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/Traits"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Toggle show/hide 'Size' line"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jkv2x")
+button_pressed = true
+text = "Size"
+
+[node name="TraitEnergy" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/Traits"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Toggle show/hide 'Energy' line"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jbj1t")
+button_pressed = true
+text = "Energy"
+
+[node name="TraitSpeed" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/Traits"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Toggle show/hide 'Speed' line"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_muem4")
+button_pressed = true
+text = "Speed"
+
+[node name="TraitSense" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/Traits"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Toggle show/hide 'Sense' line"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dp3eg")
+button_pressed = true
+text = "Sense"
+
+[node name="TraitPredatory" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/Traits"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Toggle show/hide 'Predation' line"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ld40")
+button_pressed = true
+text = "Predation"
+
+[node name="TraitsEvolutionRenderer" type="Control" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+
+[node name="TraitsEvolutionGraph" type="Control" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitsEvolutionRenderer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_jbj1t")
+x_min = 1.0
+x_decimal_places = 0
+x_gridlines_opacity = 0.1
+y_max = 100.0
+y_tick_count = 5
+y_decimal_places = 0
+y_gridlines_opacity = 0.1
+background_color = Color(0.137255, 0.137255, 0.137255, 1)
+axis_color = Color(0.500095, 0.500095, 0.500095, 1)
+axis_thickness = 1.5
+label_size = 0.6
+metadata/_custom_type_script = "uid://i1x452w5gmhn"
+
+[node name="SizeSeries" type="Node" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitsEvolutionRenderer/TraitsEvolutionGraph"]
+unique_name_in_owner = true
+script = ExtResource("12_a8y0u")
+thickness = 0.5
+color = Color(0.25, 0.25, 0.5, 1)
+metadata/_custom_type_script = "uid://d1715ceucjecc"
+
+[node name="EnergySeries" type="Node" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitsEvolutionRenderer/TraitsEvolutionGraph"]
+unique_name_in_owner = true
+script = ExtResource("12_a8y0u")
+thickness = 0.5
+color = Color(0.25, 0.5, 0.5, 1)
+metadata/_custom_type_script = "uid://d1715ceucjecc"
+
+[node name="SpeedSeries" type="Node" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitsEvolutionRenderer/TraitsEvolutionGraph"]
+unique_name_in_owner = true
+script = ExtResource("12_a8y0u")
+thickness = 0.5
+color = Color(0.25, 0.5, 0.25, 1)
+metadata/_custom_type_script = "uid://d1715ceucjecc"
+
+[node name="SenseSeries" type="Node" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitsEvolutionRenderer/TraitsEvolutionGraph"]
+unique_name_in_owner = true
+script = ExtResource("12_a8y0u")
+thickness = 0.5
+color = Color(0.5, 0.5, 0.25, 1)
+metadata/_custom_type_script = "uid://d1715ceucjecc"
+
+[node name="PredatorySeries" type="Node" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitsEvolutionRenderer/TraitsEvolutionGraph"]
+unique_name_in_owner = true
+script = ExtResource("12_a8y0u")
+thickness = 0.5
+color = Color(0.5, 0.25, 0.25, 1)
+metadata/_custom_type_script = "uid://d1715ceucjecc"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics"]
+layout_mode = 2
+
+[node name="TraitAverage" type="Label" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Average trait distribution in current generation"
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_yc10j")
+text = "Real-time Trait Distribution"
+
+[node name="TraitsDistributionGraphButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Save .png image"
+text = "Print"
+
+[node name="TraitDistribution" type="Control" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 320)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitDistribution"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.137255, 0.137255, 0.137255, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitDistribution"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RadarGraph" type="Control" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics/TraitDistribution/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+script = ExtResource("14_jbj1t")
+key_count = 5
+radius = 140.0
+key_items = Array[Dictionary]([{
+"title": "Size",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Energy",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Speed",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Sense",
+"tooltip": "",
+"value": 0.0
+}, {
+"title": "Predation",
+"tooltip": "",
+"value": 0.0
+}])
+step = 5.0
+rounded = true
+font = ExtResource("15_muem4")
+background_color = Color(0.12103, 0.12103, 0.12103, 1)
+background_outline_color = Color(0.265361, 0.265361, 0.265361, 1)
+background_outline_width = 2.0
+graph_color = Color(0.394353, 0.394353, 0.394353, 1)
+graph_outline_color = Color(0.502719, 0.502719, 0.502719, 1)
+show_guides = true
+guide_color = Color(0.18359, 0.18359, 0.18359, 1)
+guide_step = 25.0
+items/key_0/value = 0.0
+items/key_0/title = "Size"
+items/key_0/tooltip = ""
+items/key_1/value = 0.0
+items/key_1/title = "Energy"
+items/key_1/tooltip = ""
+items/key_2/value = 0.0
+items/key_2/title = "Speed"
+items/key_2/tooltip = ""
+items/key_3/value = 0.0
+items/key_3/title = "Sense"
+items/key_3/tooltip = ""
+items/key_4/value = 0.0
+items/key_4/title = "Predation"
+items/key_4/tooltip = ""
+metadata/_custom_type_script = "uid://bsnqqpu4y5f26"
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/MarginContainer/MainUI/AnalyticsPanel/Analytics"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProgramControl" type="Node2D" parent="."]
+
+[node name="UnitsSpawn" type="Node2D" parent="ProgramControl"]
+script = ExtResource("1_o5qli")
+amount = 100
+speed_random = 20.0
+energy_random = 50.0
+size_random = 20.0
+sense_random = 50.0
+
+[node name="FoodSpawn" type="Node2D" parent="ProgramControl"]
+script = ExtResource("7_tipki")
+
+[connection signal="value_changed" from="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment/Speed" to="CanvasLayer/Control/MarginContainer/MainUI/ControlPanel/SpeedAdjustment" method="_on_speed_label_value_changed"]

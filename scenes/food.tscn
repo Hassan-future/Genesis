@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d04kllnbupw42"]
+
+[ext_resource type="Script" uid="uid://beeeldqgxx6ly" path="res://scenes/scripts/spawned_food.gd" id="1_af40f"]
+[ext_resource type="PackedScene" uid="uid://bfvf6addyfyp4" path="res://assets/draw_circle.tscn" id="2_af40f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bpi5a"]
+radius = 2.0
+
+[node name="Food" type="StaticBody2D" groups=["food"]]
+script = ExtResource("1_af40f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bpi5a")
+
+[node name="FoodDraw" parent="." instance=ExtResource("2_af40f")]
+radius = 2.0
+color = Color(0.231525, 0.495105, 0.678375, 1)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://wfkvf1tu7rdg"]
+
+[ext_resource type="Script" uid="uid://ckbcpv3g4u61m" path="res://scenes/units/scripts/spawned_unit.gd" id="1_6e3tn"]
+[ext_resource type="PackedScene" uid="uid://bfvf6addyfyp4" path="res://assets/draw_circle.tscn" id="2_6e3tn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cx6aj"]
+radius = 100.0
+
+[node name="Unit" type="Area2D" groups=["prey"]]
+script = ExtResource("1_6e3tn")
+
+[node name="SenseColShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cx6aj")
+debug_color = Color(0, 0.6, 0.7, 0.019)
+
+[node name="Body" parent="." instance=ExtResource("2_6e3tn")]
