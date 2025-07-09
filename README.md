@@ -10,9 +10,10 @@
 
 Genesis is a real-time evolution simulator built with Godot Engine that demonstrates how traits evolve through natural selection across generations. Watch digital organisms compete for resources, reproduce, and pass traits to offspring with mutations.
 
-![Genesis Screenshot](GenesisScreenshot.png)
+![Genesis Screenshot](Documentation/GenesisGIF.gif)
 
 **[Download Genesis at Itch.io](https://bukkbeek.itch.io/genesis)** 
+**[Download Readme as a pdf](Documentation/README [PDF].pdf)** 
 
 **📁 This repository contains the Godot project files**
 
@@ -114,13 +115,13 @@ Genesis implements realistic biological tradeoffs:
 ### **Real-Time Visualization**
 - **Population graphs**: Track growth and changes over generations
 - **Trait evolution**: Monitor average trait values over time  
-- **Radar charts**: Visualize current population distribution
+- **Radar graph**: Visualize current population's trait distribution
 
 ### **Data Management**
 - **Console logging**: Detailed event tracking
 - **Export capabilities**: Save data and screenshots
 - **Search functionality**: Find specific events in logs
-- **Auto-save mode**: Continuous data logging
+- **Write to file**: Continuous data logging
 
 ---
 
@@ -129,7 +130,7 @@ Genesis implements realistic biological tradeoffs:
 ### **Main Controls**
 - **START/PAUSE/STOP**: Control simulation state
 - **RESET**: Restore defaults and clear simulation
-- **Speed slider**: Adjust simulation speed
+- **Speed Control**: Adjust simulation speed
 
 ### **Configuration Panels**
 - **Population**: Set initial count and trait base values
